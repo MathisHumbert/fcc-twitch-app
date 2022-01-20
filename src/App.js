@@ -26,7 +26,12 @@ function App() {
     });
   };
 
+  const handleClick = (e) => {
+    setType(e.target.textContent);
+  };
+
   useEffect(() => {
+    setAllChannels([]);
     channels.forEach((channel) => {
       fetchData(channel);
     });
@@ -43,9 +48,9 @@ function App() {
         <article className='top'>
           <h2>STREAMERS</h2>
           <div className='btn-container'>
-            <button>all</button>
-            <button>online</button>
-            <button>offline</button>
+            <button onClick={handleClick}>all</button>
+            <button onClick={handleClick}>online</button>
+            <button onClick={handleClick}>offline</button>
           </div>
         </article>
         <article className='bottom'>
@@ -53,9 +58,26 @@ function App() {
             <h1>Loading...</h1>
           ) : (
             <div>
-              {allChannels.map((item) => {
-                console.log(item);
-                return <h1>hello</h1>;
+              {allChannels.map((item, index) => {
+                const self = item._links.self.split('/')[5];
+                if (type === 'online' && !item.stream) {
+                  return '';
+                }
+                if (type === 'offline' && item.stream) {
+                  return '';
+                }
+                return (
+                  <div
+                    className={!item.stream ? 'offline' : 'online'}
+                    key={index}
+                  >
+                    <h3>{self}</h3>
+                    <p>{item.stream ? item.stream.game : 'offline'}</p>
+                    <a href={`https://www.twitch.tv/${self}`}>
+                      check this channel
+                    </a>
+                  </div>
+                );
               })}
             </div>
           )}
