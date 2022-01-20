@@ -57,7 +57,7 @@ function App() {
           {loading ? (
             <h1>Loading...</h1>
           ) : (
-            <div>
+            <div className='stream-container'>
               {allChannels.map((item, index) => {
                 const self = item._links.self.split('/')[5];
                 if (type === 'online' && !item.stream) {
@@ -68,12 +68,18 @@ function App() {
                 }
                 return (
                   <div
-                    className={!item.stream ? 'offline' : 'online'}
+                    className={
+                      !item.stream ? 'stream offline' : 'stream online'
+                    }
                     key={index}
                   >
                     <h3>{self}</h3>
                     <p>{item.stream ? item.stream.game : 'offline'}</p>
-                    <a href={`https://www.twitch.tv/${self}`}>
+                    <a
+                      href={`https://www.twitch.tv/${self}`}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
                       check this channel
                     </a>
                   </div>
