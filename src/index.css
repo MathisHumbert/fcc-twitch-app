@@ -43,6 +43,10 @@ button:hover {
   color: #d53f41;
 }
 
+.active {
+  color: #d53f41;
+}
+
 .bottom {
   display: flex;
   flex-direction: column;

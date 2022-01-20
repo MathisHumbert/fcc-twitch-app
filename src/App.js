@@ -48,9 +48,24 @@ function App() {
         <article className='top'>
           <h2>STREAMERS</h2>
           <div className='btn-container'>
-            <button onClick={handleClick}>all</button>
-            <button onClick={handleClick}>online</button>
-            <button onClick={handleClick}>offline</button>
+            <button
+              onClick={handleClick}
+              className={type === 'all' ? 'active' : null}
+            >
+              all
+            </button>
+            <button
+              onClick={handleClick}
+              className={type === 'online' ? 'active' : null}
+            >
+              online
+            </button>
+            <button
+              onClick={handleClick}
+              className={type === 'offline' ? 'active' : null}
+            >
+              offline
+            </button>
           </div>
         </article>
         <article className='bottom'>
