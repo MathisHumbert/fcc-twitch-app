@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+const channels = [];
 
 function App() {
+  const fetchData = async (channel) => {
+    const response = await fetch(
+      `https://twitch-proxy.freecodecamp.rocks/twitch-api/streams/${channel}`
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+
+  useEffect(() => {
+    fetchData('manuelferraratv');
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <h1>twitch</h1>
+    </main>
   );
 }
 
